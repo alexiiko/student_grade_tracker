@@ -9,13 +9,13 @@ class App(tk.Tk):
         self.title(title)
         self.geometry(f"{width}x{height}")
         self.iconbitmap(icon_path)
-        self.add_another_class()
-
-    def add_another_class(self):
-        app_logic = Logic(self)
+        self.app_logic = Logic(self)
 
     def run(self):
         self.mainloop()
+
+    def update_averages(self):
+        self.after(1000, self.update_averages)
 
 
 if __name__ == "__main__":
