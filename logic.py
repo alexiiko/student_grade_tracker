@@ -18,12 +18,6 @@ class Logic(tk.Frame):
 
         self.grade_counter = 0
 
-    """
-    potential fixes: make two frames for the first row (with the button and the grade labels) so that the grades and the lables
-                     are seperated from each other 
-                     make the calc_avg function run constantly (so that it always checks in real time)
-    """
-
     def calc_avg(self):
         self.subjects_avgs.clear()
         for _ in self.subject_list:
