@@ -10,12 +10,10 @@ class App(tk.Tk):
         self.geometry(f"{width}x{height}")
         self.iconbitmap(icon_path)
         self.app_logic = Logic(self)
+        self.resizable(True, False)
 
     def run(self):
         self.mainloop()
-
-    def update_averages(self):
-        self.after(1000, self.update_averages)
 
 
 if __name__ == "__main__":

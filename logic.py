@@ -5,7 +5,22 @@ class Logic(tk.Frame):
     def __init__(self, master) -> None:
         super().__init__(master)
 
-        self.subject_list = ["English", "Math"]
+        self.subject_list = [
+            "English",
+            "Mathematics",
+            "Science",
+            "Social Studies",
+            "Physics",
+            "Astronomy",
+            "Economics",
+            "Government",
+            "Psychology",
+            "Sociology",
+            "Literature",
+            "Creative Writing",
+            "Journalism",
+        ]
+
         self.subjects_avgs = []
 
         self.create_subject_avgs(master)
@@ -13,8 +28,12 @@ class Logic(tk.Frame):
         self.window = master
 
         self.create_column_button = tk.Button(
-            master=master, text="Add new grade", command=self.create_new_grade_column
-        ).grid(row=0, column=0, columnspan=2)
+            master=master, text="Add grade", command=self.create_new_grade_column
+        ).grid(row=0, column=0)
+
+        self.calc_avg_button = tk.Button(
+            master=master, text="Calculate", command=self.calc_avg
+        ).grid(row=0, column=1)
 
         self.grade_counter = 0
 
@@ -34,9 +53,9 @@ class Logic(tk.Frame):
                     if (
                         isinstance(widget, tk.Entry)
                         and widget.get().isdigit()
-                        and int(widget.get()) > 1
-                        and int(widget.get()) < 7
+                        and 1 <= int(widget.get()) <= 6
                     ):
+                        print(widget.get())
                         print("Got entry name grid")
                         column_sum += int(widget.get())
                         entry_number += 1
@@ -45,8 +64,6 @@ class Logic(tk.Frame):
                 avg = column_sum / entry_number
                 self.subjects_avgs[row_counter - 1] = round(avg, 2)
                 print(self.subjects_avgs)
-
-            print(len(self.subjects_avgs))
 
         for idx, avg in enumerate(self.subjects_avgs):
             row_idx = idx + 1
@@ -65,11 +82,10 @@ class Logic(tk.Frame):
             grade_entry.grid(
                 column=self.grade_counter + 2, row=entry + 1
             )  # 2 because after the avgs the grades get shown
-        self.calc_avg()
 
     def create_subject_avgs(self, window):
         for label in range(len(self.subject_list)):
             tk.Label(master=window, text=self.subject_list[label]).grid(
-                column=0, row=label + 1
+                column=0, row=label + 1, sticky="w"
             )
             tk.Label(master=window).grid(column=1, row=label + 1)
